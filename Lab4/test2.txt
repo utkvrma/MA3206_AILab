@@ -1,0 +1,26 @@
+% Test Case 2 - Varied food costs, group size 2
+% MA3206 AI Assignment 4
+% This tests cost-sensitivity: TC is most expensive, DF cheapest.
+% Food item costs
+C TC 3
+C DF 1
+C PM 2
+C GJ 2
+% Group size
+G 2
+% Inputs - books / notes
+I 1 2 3 4 5 6 -1
+% Outputs
+O 13 14 17 -1
+% Assignment dependency list (same graph as test1, different costs)
+A 1 1 3 7 TC
+A 2 4 2 8 TC
+A 3 1 3 9 TC
+A 4 2 3 10 PM
+A 5 7 8 11 TC
+A 6 4 6 12 TC
+A 7 6 9 13 PM
+A 8 10 5 14 GJ
+A 9 1 11 15 DF
+A 10 3 12 16 TC
+A 11 15 16 17 DF

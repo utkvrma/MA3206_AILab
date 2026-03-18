@@ -1,0 +1,44 @@
+% Test Case 3 - More sequential/chain-like dependencies, group size 2
+% MA3206 AI Assignment 4
+% Graph: A1->A3->A5->A8->A10->A11 (main chain)
+%        A2->A4->A6->A9  (parallel chain)
+%        A7 depends on A5 and A6
+%        A10 depends on A7 and A8
+% This stresses the dependency-depth and topological-order strategies.
+%
+% Node IDs for I/O:
+%  Inputs:  1,2,3,4,5
+%  A1: in=1,2   out=10   food=TC
+%  A2: in=3,4   out=11   food=DF
+%  A3: in=10,5  out=12   food=PM
+%  A4: in=11,2  out=13   food=TC
+%  A5: in=12    out=14   food=GJ
+%  A6: in=13    out=15   food=DF
+%  A7: in=14,15 out=16   food=PM
+%  A8: in=14,1  out=17   food=TC
+%  A9: in=15,4  out=18   food=GJ
+%  A10: in=16,17 out=19  food=DF
+%  A11: in=18,19 out=20  food=TC
+% Outputs: 20
+C TC 2
+C DF 1
+C PM 3
+C GJ 2
+% Group size
+G 2
+% Inputs
+I 1 2 3 4 5 -1
+% Outputs
+O 20 -1
+% Assignment dependency list
+A 1 1 2 10 TC
+A 2 3 4 11 DF
+A 3 10 5 12 PM
+A 4 11 2 13 TC
+A 5 12 14 GJ
+A 6 13 15 DF
+A 7 14 15 16 PM
+A 8 14 1 17 TC
+A 9 15 4 18 GJ
+A 10 16 17 19 DF
+A 11 18 19 20 TC
