@@ -56,28 +56,6 @@ class Assignment:
     def __repr__(self) -> str:
         return f"A{self.aid}(food={self.food}, deps={self.dependencies})"
 
-
-class ScheduleResult:
-    """Container for one complete scheduling result."""
-
-    def __init__(self, strategy: str, schedule: List[List[int]],
-                 menus: List[Dict[str, int]], costs_per_day: List[int],
-                 total_days: int, total_cost: int,
-                 explored_states: Optional[int] = None):
-        self.strategy = strategy
-        self.schedule = schedule            # list of day-lists of assignment IDs
-        self.menus = menus                  # per-day food-item counts
-        self.costs_per_day = costs_per_day  # per-day total cost
-        self.total_days = total_days
-        self.total_cost = total_cost
-        self.explored_states = explored_states  # A* only
-
-    def __repr__(self) -> str:
-        return (f"ScheduleResult(strategy={self.strategy}, "
-                f"days={self.total_days}, cost={self.total_cost}, "
-                f"explored_states={self.explored_states})")
-
-
 # ---------------------------------------------------------------------------
 # Core scheduler
 # ---------------------------------------------------------------------------
@@ -89,15 +67,14 @@ class AssignmentScheduler:
 
     Strategies
     ----------
-    greedy_cost  : Sort available assignments by ascending food cost; tie-break
-                   by assignment ID.  Attempts to minimise each day's food bill,
+    greedy_cost  : Sort available assignments by ascending food cost, USING PRIORITY QUEUE; 
+                   tie-break by assignment ID.  Attempts to minimise each day's food bill,
                    though the total cost is fixed so this merely shifts when
                    expensive days occur.
 
     greedy_depth : Sort by descending downstream-assignment count (descendant
-                   count), then by descending BFS topological depth as a
-                   secondary key.  Processes critical-path nodes first, maximising
-                   the set of tasks available after each day.  This is the
+                   count), USING EXPLORATORY DFS.  Processes critical-path nodes first,
+                   maximising the set of tasks available after each day.  This is the
                    recommended strategy and a greedy approximation of CPM.
 
     greedy_freq  : Sort by descending frequency of the required food type among
@@ -106,9 +83,9 @@ class AssignmentScheduler:
                    useful when menu-identity discounts apply.
 
     greedy_topo  : Sort by ascending BFS level in the dependency DAG (shallowest
-                   nodes first), tie-break by assignment ID.  Equivalent to a BFS
-                   traversal of the dependency graph; produces predictable,
-                   cycle-free schedules.
+                   nodes first), USING KAHN'S ALGORITHM tie-break by assignment ID. 
+                   Equivalent to a BFS traversal of the dependency graph; produces 
+                   predictable, cycle-free schedules.
 
     astar        : Optimal A* search over the space of subsets (represented as
                    bitmasks) of completed assignments.  The heuristic h(n) is the
@@ -198,10 +175,7 @@ class AssignmentScheduler:
         Level 0 = assignments with no dependencies.
         Level k = assignments whose deepest dependency is at level k-1.
 
-        Used as:
-          - Secondary sort key for greedy_depth (deeper = schedule later → prefer
-            shallower dependencies first if descendant counts tie).
-          - Primary sort key for greedy_topo (ascending level = earliest ready).
+        Used as primary sort key for greedy_topo (ascending level = earliest ready).
         """
         # Compute in-degree
         indeg: Dict[int, int] = {aid: 0 for aid in self.assignments}
