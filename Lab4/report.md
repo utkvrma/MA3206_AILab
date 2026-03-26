@@ -241,8 +241,8 @@ The most important insight for this problem is that the total food cost is a con
 
 | Day | Assignments | Food Items | Daily Cost | Cumulative Cost |
 |-----|-------------|------------|------------|-----------------|
-| 1 | A1, A2, A5, A8 | TC, TC, DF, TC | 5 | 5 |
-| 2 | A3, A4, A6, A9 | TC, PM, TC, DF | 8 | 11 |
+| 1 | A1, A2, A5, A8 | TC, TC, DF, TC | 4 | 4 |
+| 2 | A3, A4, A6, A9 | TC, PM, TC, DF | 7 | 11 |
 | 3 | A7, A10, A11 | PM, GJ, DF | 10 | 21 |
 | 4 | A12 | GJ | 8 | 29 |
 | 5 | A13 | DF | 2 | 31 |
