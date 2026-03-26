@@ -123,23 +123,23 @@ All 11 assignments completed, i.e., `done == all_assignments`.
 
 | Strategy                       | Total Days | Total Cost |
 |--------------------------------|-----------|------------|
-| Greedy by Food Cost            | 7         | 26         |
-| Greedy by Dependency Depth     | 7         | 26         |
-| Greedy by Food Type Frequency  | 7         | 26         |
-| Greedy by Topological Order    | 7         | 26         |
-| A\*                            | 8         | 26         |
+| Greedy by Food Cost            | 7         | 56         |
+| Greedy by Dependency Depth     | 7         | 56         |
+| Greedy by Food Type Frequency  | 7         | 56         |
+| Greedy by Topological Order    | 7         | 56         |
+| A\*                            | 8         | 56         |
 
-> Note: All strategies reach the same minimum cost (26) for this problem instance since the food costs are dictated by the structure of the DAG. A* schedules an extra day due to sub-optimal batching. Greedy in all approaches confirms cost 26 is optimal (States explored: 84).
+> Note: All strategies reach the same minimum cost (56) for this problem instance since the food costs are dictated by the structure of the DAG. A* schedules an extra day due to sub-optimal batching. Greedy in all approaches confirms cost 26 is optimal (States explored: 84).
 
 ## 5b. Statistical Comparison — Test Case 3 (Chain-heavy, g=2, TC=2, DF=1, PM=3, GJ=2)
 
 | Strategy                       | Total Days | Total Cost |
 |--------------------------------|-----------|------------|
-| Greedy by Food Cost            | 7         | 21         |
-| Greedy by Dependency Depth     | 6         | **21**     |
-| Greedy by Food Type Frequency  | 7         | 21         |
-| Greedy by Topological Order    | 7         | 21         |
-| **A\* (Optimal)**              | **6**     | **21**     |
+| Greedy by Food Cost            | 8         | 47         |
+| Greedy by Dependency Depth     | 8         | **47**     |
+| Greedy by Food Type Frequency  | 8         | 47         |
+| Greedy by Topological Order    | 8         | 47         |
+| **A\* (Optimal)**              | **8**     | **47**     |
 
 > A*confirms 21 is the minimum cost (States explored: 10 — very efficient on this linear graph). Dependency Depth greedy again matches A* optimally.
 
@@ -242,13 +242,13 @@ The most important insight for this problem is that the total food cost is a con
 | Day | Assignments | Food Items | Daily Cost | Cumulative Cost |
 |-----|-------------|------------|------------|-----------------|
 | 1 | A1, A2, A5, A8 | TC, TC, DF, TC | 5 | 5 |
-| 2 | A3, A4, A6, A9 | TC, PM, TC, DF | 8 | 13 |
-| 3 | A7, A10, A11 | PM, GJ, DF | 14 | 27 |
-| 4 | A12 | GJ | 8 | 35 |
-| 5 | A13 | DF | 2 | 37 |
-| 6 | A14 | GJ | 8 | 45 |
-| 7 | A15 | DF | 2 | 47 |
-| 8 | A16 | GJ | 8 | 55 |
+| 2 | A3, A4, A6, A9 | TC, PM, TC, DF | 8 | 11 |
+| 3 | A7, A10, A11 | PM, GJ, DF | 10 | 21 |
+| 4 | A12 | GJ | 8 | 29 |
+| 5 | A13 | DF | 2 | 31 |
+| 6 | A14 | GJ | 8 | 37 |
+| 7 | A15 | DF | 2 | 39 |
+| 8 | A16 | GJ | 8 | 47 |
 
 ---
 
